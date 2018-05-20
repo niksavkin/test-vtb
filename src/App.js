@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Image } from './components/image';
 import { Button } from './components/button';
 import { Counter } from './components/counter';
+import styles from "./App.module.scss";
 
 class App extends Component {
   state = {
@@ -12,7 +13,7 @@ class App extends Component {
   renderImages() {
     let result = [];
     for (let i=1; i<= this.state.imageQuantity; i++) {
-      result.push((<Image src={this.state.imageSrc}/>))
+      result.push((<Image src={this.state.imageSrc} key={i}/>))
     }
     return result;
   }
@@ -20,15 +21,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div>
+        <div className={styles.Center}>
         {this.renderImages()}
         </div>
-        <div>
+        <div className={styles.Center}>
           <Counter text={this.state.imageQuantity}/>
         </div>
-        <div>
-          <Button text="-" onClick={this.minusClickHandler.bind(this)}/>
-          <Button text="+" onClick={this.plusClickHandler.bind(this)}/>
+        <div className={styles.Center}>
+          <Button text="-" className = {styles.Button} onClick={this.minusClickHandler.bind(this)} disabled={this.state.imageQuantity === 1}/>
+          <Button text="+" className = {styles.Button} onClick={this.plusClickHandler.bind(this)}/>
         </div>
       </div>
     );
